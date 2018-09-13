@@ -5,15 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: ["babel-polyfill", './src/main.js'],
-  devtool: 'inline-source-map',
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  devServer: {
-    contentBase: './dist',
-    hot: true // 启动HMR
   },
   resolve: {
     alias: {
@@ -100,7 +95,14 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  // https: //www.cnblogs.com/caideyipi/articles/7080010.html
+  devServer: {
+    contentBase: './dist',
+    historyApiFallback: true,
+    inline: true,
+    hot: true // 启动HMR
+  }
 };
 
 if (process.env.NODE_ENV === 'production') {

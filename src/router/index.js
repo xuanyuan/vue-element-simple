@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-let RouteList = [
+const RouteList = [
   {
     path: '/',
     component: resolve => require(['~/views/Layout/App.vue'], resolve),

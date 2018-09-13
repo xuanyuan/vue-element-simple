@@ -3,7 +3,7 @@
     <div class="login-form">
       <div class="login-header">
         <img src="../../assets/images/logo.png" height="100" alt="">
-        <!-- <p>{{ $Config.siteName }}</p> -->
+        <p>{{ $Config.siteName }}</p>
       </div>
       <el-input
           placeholder="请输入用户名"
@@ -22,7 +22,6 @@
           @keyup.native.enter="login"
       >
       </el-input>
-
       <el-button
           type="primary" :loading="loginLoading"
           style="width: 100%;margin-bottom: 18px"
@@ -30,10 +29,9 @@
       >登录
       </el-button>
       <div>
-        <el-checkbox v-model="Remenber"> Remenber</el-checkbox>
-        <a href="javascript:;" style="float: right;color: #3C8DBC;font-size: 14px">Register</a>
+        <el-checkbox v-model="Remenber">记住密码</el-checkbox>
+        <a href="javascript:;" style="float: right;color: #3C8DBC;font-size: 14px">注册</a>
       </div>
-
     </div>
   </div>
 </template>
@@ -54,11 +52,11 @@
         APP.loginLoading = true;
         setTimeout(() => {
           sessionStorage.setItem('login', '123456789');
-          APP.$notify({
-            title: '登录成功',
-            message: '很高兴你使用ElementUIAdmin！别忘了给个Star哦。',
-            type: 'success'
-          });
+          // APP.$notify({
+          //   title: '登录成功',
+          //   message: '很高兴你使用ElementUIAdmin！别忘了给个Star哦。',
+          //   type: 'success'
+          // });
           APP.loginLoading = false;
           APP.$router.push({path: '/'});
         }, 1000);        
