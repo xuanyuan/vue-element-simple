@@ -1,5 +1,5 @@
 export default {
-  siteName:'Element UI Admin模板',
+  siteName:'燃气报警云平台',
   minSiteMame:'EUI',
   tokenKey: 'Authorization',//存在sessionStorage里面的tokenKey
   postStatus:{

@@ -20,6 +20,32 @@ const RouteList = [
           keepAlive: false
         },
         component: resolve => require(['~/views/Home/Index.vue'], resolve),
+      },
+      {
+        path: '/device_monitor',
+        name: 'DeviceMonitor',
+        meta: {
+          title: '设备监控',
+          keepAlive: false
+        },
+        component: resolve => require(['~/views/Monitor/DeviceMonitor.vue'], resolve)
+      },
+      {
+        path: '/push_history',
+        name: 'PushHistory',
+        meta: {
+          title: '推送历史',
+          keepAlive: false
+        },
+        component: resolve => require(['~/views/Monitor/PushHistory.vue'], resolve)
+      }, {
+        path: '/history_report',
+        name: 'HistoryReport',
+        meta: {
+          title: '上报历史',
+          keepAlive: false
+        },
+        component: resolve => require(['~/views/Monitor/HistoryReport.vue'], resolve)
       }
     ]
   },
@@ -27,7 +53,7 @@ const RouteList = [
     path: '/login',
     name: 'Login',
     meta: {
-      title: '后台登录',
+      title: '登录',
       keepAlive: false
     },
     components: {

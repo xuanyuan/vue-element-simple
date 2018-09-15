@@ -9,7 +9,28 @@ menu.home = {
   path: '/',
   icon: 'fa fa-tachometer',
 };
-
+/**
+ * 实时监控
+ * @type{{name: string, icon: string, children: {}}}
+ */
+menu.time_monitor = {
+  name: '实时监控',
+  icon: 'fa fa-map',
+  children: {
+    device_monitor: {
+      name: '设备监控',
+      path: '/device_monitor'
+    },
+    push_history: {
+      name: '推送历史',
+      path: '/push_history'
+    },
+    history_report: {
+      name: '上报历史',
+      path: '/history_report'
+    }
+  }
+}
 
 /**
  * 字体图标
