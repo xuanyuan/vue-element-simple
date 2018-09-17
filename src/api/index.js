@@ -3,7 +3,7 @@ import {
   Message,
   MessageBox
 } from 'element-ui';
-
+import Cookies from 'js-cookie';
 
 const service = axios.create({
   // baseURL: 'http://192.168.37.233:8088/',
@@ -14,10 +14,10 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(
   config => {
-    // if (store.getters.token && store.getters.user) {
-    //   config.headers.token = getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
-    //   config.headers.userId = getUser().id;
-    // }
+    if (Cookies.get("token")) {
+      config.headers.token = Cookies.get("token"); // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers.userId = Cookies.get("userId");
+    }
     config.headers = Object.assign(
       config.headers || {}, {
         "Content-Type": "application/json;charset=utf-8",
@@ -26,12 +26,10 @@ service.interceptors.request.use(
         }
       }
     );
-
     return config;
   },
   error => {
     // Do something with request error
-    // console.log(error); // for debug
     Promise.reject(error);
   }
 );
@@ -49,7 +47,7 @@ service.interceptors.response.use(
         duration: 5 * 1000
       });
 
-      // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
+      // 1000:token失效; 
       if (headers.resultcode === "1000") {
         MessageBox.confirm(
           "你已被登出，可以取消继续留在该页面，或者重新登录",
@@ -59,7 +57,9 @@ service.interceptors.response.use(
             type: "warning"
           }
         ).then(() => {
-          
+          this.$router.push({
+            path: "/login"
+          });
           // store.dispatch("FedLogOut").then(() => {
           //   location.reload(); // 为了重新实例化vue-router对象 避免bug
           // });
@@ -71,8 +71,6 @@ service.interceptors.response.use(
     }
   },
   error => {
-    
-    // console.log("err" + error); // for debug
     Message({
       message: error.message,
       type: "error",

@@ -22,6 +22,7 @@
 
 <script>
 import api from "~/api";
+import Cookies from 'js-cookie';
 export default {
   data() {
     return {
@@ -46,7 +47,8 @@ export default {
             message: "登录成功",
             type: "success"
           });
-          sessionStorage.setItem("login", "123456789");
+          Cookies.set(this.$Config.tokenKey, res.headers.token);
+          Cookies.set(this.$Config.userKey, res.data.id);
           this.$router.push({ path: "/" });
         }
       });

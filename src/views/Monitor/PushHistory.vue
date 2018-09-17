@@ -7,13 +7,20 @@
       <div class="demo">
         <el-row :gutter="20">
           <el-form :inline="true" :model="formInline" class="demo-form-inline">
-            <el-form-item label="审批人">
-              <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+            <el-form-item label="告警设备">
+              <el-input v-model="formInline.deviceAddress" placeholder="告警设备"></el-input>
             </el-form-item>
-            <el-form-item label="活动区域">
-              <el-select v-model="formInline.region" placeholder="活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
+            <el-form-item label="推送内容">
+              <el-input v-model="formInline.pushInfo" placeholder="推送内容"></el-input>
+            </el-form-item>
+            <el-form-item label="推送类型">
+              <el-select v-model="formInline.pushType" @change="search" placeholder="全部">
+                <el-option v-for="item in pushTypeList" :label="item.label" :value="item.value" :key="item.value"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="推送状态">
+              <el-select v-model="formInline.state" placeholder="全部">
+                <el-option v-for="item in stateList" :label="item.label" :value="item.value" :key="item.value"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item>
@@ -30,11 +37,29 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
+              <el-button type="text" @click="onEdit(scope.row)">点击打开 Dialog</el-button>
               <el-button type="primary" @click="onEdit(scope.row)" icon="el-icon-edit" size="small">修改</el-button>
               <el-button type="primary" @click="onDel(scope.row)" icon="el-icon-delete" size="small">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
+        <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
+          <el-form label-position="right" label-width="80px" v-if="row" :model="row">
+            <el-form-item label="名称">
+              <el-input v-model="row.deviceAddress"></el-input>
+            </el-form-item>
+            <el-form-item label="活动区域">
+              <el-input v-model="row.type"></el-input>
+            </el-form-item>
+            <el-form-item label="活动形式">
+              <el-input v-model="row.state"></el-input>
+            </el-form-item>
+          </el-form>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          </span>
+        </el-dialog>
       </div>
     </el-card>
 
@@ -42,33 +67,32 @@
 </template>
 
 <script>
+const pushTypeList = [
+  { label: "短信", value: "0" },
+  { label: "app", value: "1" },
+  { label: "web", value: "2" }
+];
+const stateList = [
+  { label: "推送失败", value: "10" },
+  { label: "正在推送", value: "11" },
+  { label: "推送成功", value: "12" }
+];
 export default {
   data() {
     return {
       formInline: {
-        user: "",
-        region: ""
+        deviceAddress: "",
+        pushInfo: ""
       },
+      row: undefined,
+      pushTypeList,
+      stateList,
+      dialogVisible: false,
       tableData: [
         {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
+          date: "213",
+          name: "sfsdf",
+          address: "sdffdsfdsfds"
         }
       ]
     };
@@ -89,14 +113,35 @@ export default {
       return row.address;
     },
     onEdit(row) {
-      debugger
+      this.dialogVisible = true;
+      this.row = row;
       console.log(row);
     },
     onDel(row) {
       console.log(row);
+    },
+    search(pushType) {
+      console.log(pushType);
+    },
+    init({ deviceAddress, pushType, state, pushInfo } = {}) {
+      debugger
+      this.$Api.get({
+        url: "/v1/auths/monitor/pushhistory/page",
+        headers: {
+          deviceAddress,
+          pushType,
+          state,
+          pushInfo
+        },
+        cb: res => {
+          console.log(res);
+        }
+      });
     }
   },
-  mounted: function() {}
+  mounted: function() {
+    this.init();
+  }
 };
 </script>
 <style lang="less">

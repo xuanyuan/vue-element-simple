@@ -96,12 +96,15 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   devtool: '#eval-source-map',
-  // https: //www.cnblogs.com/caideyipi/articles/7080010.html
+  /* https: //www.cnblogs.com/caideyipi/articles/7080010.html
+  * devServer配置详细介绍
+  */
   devServer: {
     contentBase: './dist',
     historyApiFallback: true,
     inline: true,
     hot: true, // 启动HMR
+    host: '0.0.0.0',
     port: 8000,
     https: false,
     hotOnly: true,

@@ -110,6 +110,7 @@ import Screenfull from "screenfull";
 import EuiFooter from "~/views/Layout/Footer.vue";
 import NavBar from "./NavBar.vue";
 import Menu from "~/menu/index";
+import Cookies from 'js-cookie';
 
 export default {
   data() {
@@ -184,7 +185,10 @@ export default {
       this.NavBarWidth();
     },
     logout() {
-      sessionStorage.removeItem(this.$Config.tokenKey);
+      // sessionStorage.removeItem(this.$Config.tokenKey);
+      Cookies.remove(this.$Config.tokenKey);
+      Cookies.remove(this.$Config.userKey);
+      Cookies.remove(this.$Config.projectKey);
       this.$router.push({ path: "/login" });
     },
     handleOpen(key, keyPath) {

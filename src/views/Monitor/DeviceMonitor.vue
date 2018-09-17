@@ -32,6 +32,3 @@ $height: 800px;
   height: $height;
 }
 </style>
-
-
-

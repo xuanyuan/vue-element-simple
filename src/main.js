@@ -5,20 +5,22 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import Config from './config';
+import Api from './api';
 import './assets/scss/common.scss';
 import './theme/index.css';
 import './assets/css/font-awesome.min.css';
 import './assets/css/style.css';
+import Cookies from 'js-cookie';
 
 // 原型链上修改东西，不好。 
 Vue.prototype.$Config = Config;
+Vue.prototype.$Api = Api;
 
 Vue.use(ElementUI);
 
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title ? to.meta.title + '-' + Config.siteName : Config.siteName;
-
-  if (!sessionStorage.getItem('login') && to.path != '/login') {
+  if (!Cookies.get(Config.transition) && to.path != '/login') {
     next({
       path: '/login'
     });
