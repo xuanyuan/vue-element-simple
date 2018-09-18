@@ -20,7 +20,7 @@ Vue.use(ElementUI);
 
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title ? to.meta.title + '-' + Config.siteName : Config.siteName;
-  if (!Cookies.get(Config.transition) && to.path != '/login') {
+  if (!store.getters.GET_TOKEN && to.path != '/login') {
     next({
       path: '/login'
     });

@@ -4,6 +4,7 @@ import {
   MessageBox
 } from 'element-ui';
 import Cookies from 'js-cookie';
+import store from '~/store';
 
 const service = axios.create({
   // baseURL: 'http://192.168.37.233:8088/',
@@ -14,16 +15,22 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(
   config => {
-    if (Cookies.get("token")) {
-      config.headers.token = Cookies.get("token"); // 让每个请求携带自定义token 请根据实际情况自行修改
-      config.headers.userId = Cookies.get("userId");
+    // token && userId
+    if (store.getters.GET_TOKEN && store.getters.GET_USERID) {
+      config.headers.token = store.getters.GET_TOKEN; // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers.userId = store.getters.GET_USERID;
     }
+    // projectId
+    if (store.getters.GET_PROJECTID) {
+      config.headers.projectId = store.getters.GET_PROJECTID;
+    }
+
+    config.headers = config.headers || {};
     config.headers = Object.assign(
-      config.headers || {}, {
+      config.headers,
+      {
         "Content-Type": "application/json;charset=utf-8",
-        common: {
-          "X-Requested-With": "XMLHttpRequest"
-        }
+        "X-Requested-With": "XMLHttpRequest"
       }
     );
     return config;

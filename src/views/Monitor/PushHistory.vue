@@ -124,7 +124,6 @@ export default {
       console.log(pushType);
     },
     init({ deviceAddress, pushType, state, pushInfo } = {}) {
-      debugger
       this.$Api.get({
         url: "/v1/auths/monitor/pushhistory/page",
         headers: {

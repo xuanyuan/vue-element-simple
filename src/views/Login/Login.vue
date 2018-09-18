@@ -35,6 +35,7 @@ export default {
   methods: {
     login() {
       this.loginLoading = true;
+      var self = this;
       api.post({
         url: "/v1/noauth/users/login",
         data: {
@@ -47,8 +48,10 @@ export default {
             message: "登录成功",
             type: "success"
           });
-          Cookies.set(this.$Config.tokenKey, res.headers.token);
-          Cookies.set(this.$Config.userKey, res.data.id);
+          self.$store.dispatch('SET_AUTH', {
+            token: res.headers.token,
+            userId: res.data.id
+          });
           this.$router.push({ path: "/" });
         }
       });
