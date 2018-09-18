@@ -22,7 +22,6 @@
 
 <script>
 import api from "~/api";
-import Cookies from 'js-cookie';
 export default {
   data() {
     return {

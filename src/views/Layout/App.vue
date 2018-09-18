@@ -199,8 +199,8 @@ export default {
     }
   },
   mounted: function() {
-    this.switchTabBar = localStorage.getItem("switchTabBar") ? true : false;
-    this.fixedTabBar = localStorage.getItem("fixedTabBar") ? true : false;
+    this.switchTabBar = !!localStorage.getItem("switchTabBar");
+    this.fixedTabBar = !!localStorage.getItem("fixedTabBar");
     if (this.switchTabBar) {
       document.getElementById("mainContainer").style.minHeight =
         "calc(100vh - 139px)";

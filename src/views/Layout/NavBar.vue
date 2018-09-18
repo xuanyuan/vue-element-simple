@@ -34,7 +34,6 @@
             path: this.$route.path,
             title: this.$route.meta.title,
           });
-
         },
         // 深度观察
         deep: true
@@ -48,7 +47,6 @@
         if (thisPath == this.$route.path) {
           this.$router.push(nav[(nav.length - 1)].path);
         }
-
       }
     },
     mounted: function () {

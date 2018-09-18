@@ -10,9 +10,8 @@ import './assets/scss/common.scss';
 import './theme/index.css';
 import './assets/css/font-awesome.min.css';
 import './assets/css/style.css';
-import Cookies from 'js-cookie';
 
-// 原型链上修改东西，不好。 
+// 原型链上修改东西，不好
 Vue.prototype.$Config = Config;
 Vue.prototype.$Api = Api;
 
@@ -32,6 +31,7 @@ router.afterEach(transition => {
 
 });
 
+/*eslint-disable no-new*/
 new Vue({
   el: '#app',
   router,

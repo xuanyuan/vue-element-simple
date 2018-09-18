@@ -64,5 +64,3 @@ const RouteList = [
 ]
 
 export default new Router({routes: RouteList})
-
-

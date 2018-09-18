@@ -86,7 +86,6 @@ UserManage.user = {
   path: '/user_manage',
 };
 
-
 /**
  * 分类管理
  * @type {{name: string, icon: string, children: {}}}
@@ -102,8 +101,6 @@ CategoryManage.category = {
   name: '分类列表',
   path: '/category_manage',
 };
-
-
 
 menu.permission_manage = {
   name: '权限管理',

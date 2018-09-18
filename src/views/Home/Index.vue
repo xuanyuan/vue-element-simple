@@ -122,12 +122,12 @@
   export default {
     data() {
       return {
-        radio:'',
-        elRate:2,
-        selectedOptions:[],
-        num:'',
-        dateVal:'',
-        checkList: ['选中且禁用','复选框 A'],
+        radio: '',
+        elRate: 2,
+        selectedOptions: [],
+        num: '',
+        dateVal: '',
+        checkList: ['选中且禁用', '复选框 A'],
         options: [{
           value: 'zhinan',
           label: '指南',

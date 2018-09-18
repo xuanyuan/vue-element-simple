@@ -3,7 +3,6 @@ import {
   Message,
   MessageBox
 } from 'element-ui';
-import Cookies from 'js-cookie';
 import store from '~/store';
 
 const service = axios.create({
@@ -24,7 +23,6 @@ service.interceptors.request.use(
     if (store.getters.GET_PROJECTID) {
       config.headers.projectId = store.getters.GET_PROJECTID;
     }
-
     config.headers = config.headers || {};
     config.headers = Object.assign(
       config.headers,
@@ -44,7 +42,6 @@ service.interceptors.request.use(
 // respone拦截器
 service.interceptors.response.use(
   response => {
-    
     /** code为非20000是抛错 可结合自己业务进行修改 */
     const headers = response.headers;
     if (response.status !== 200) {
@@ -54,7 +51,7 @@ service.interceptors.response.use(
         duration: 5 * 1000
       });
 
-      // 1000:token失效; 
+      // 1000:token失效;
       if (headers.resultcode === "1000") {
         MessageBox.confirm(
           "你已被登出，可以取消继续留在该页面，或者重新登录",
@@ -72,7 +69,7 @@ service.interceptors.response.use(
           // });
         });
       }
-      return Promise.reject("error");
+      return Promise.reject(new Error('token失效'));
     } else {
       return response;
     }
@@ -97,7 +94,6 @@ methods.forEach(method => {
     data = null,
     cb
   } = {}) => {
-    
     service({
       method,
       url,
@@ -108,5 +104,4 @@ methods.forEach(method => {
     )
   }
 })
-// console.log(api);
 export default api;

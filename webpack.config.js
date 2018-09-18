@@ -81,6 +81,16 @@ module.exports = {
           ]
         }
       }
+    }, {
+      test: /\.(js|vue)$/,
+      loader: 'eslint-loader',
+      enforce: 'pre',
+      include: [path.resolve('src')],
+      options: {
+        formatter: require('eslint-friendly-formatter'),
+        // 不符合Eslint规则时只警告(默认运行出错)
+        // emitWarning: !config.dev.showEslintErrorsInOverlay
+      }
     }]
   },
   plugins: [

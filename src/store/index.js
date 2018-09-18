@@ -20,9 +20,9 @@ const config = {
     }
   },
   getters: {
-    GET_TOKEN: state =>state.token,
-    GET_USERID: state =>state.userId,
-    GET_PROJECTID: state =>state.projectId
+    GET_TOKEN: state => state.token,
+    GET_USERID: state => state.userId,
+    GET_PROJECTID: state => state.projectId
   },
   actions: {
     SET_AUTH(context, data) {
@@ -34,5 +34,4 @@ const config = {
     }
   }
 }
-
 export default new Vuex.Store(config)
