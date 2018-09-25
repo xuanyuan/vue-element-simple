@@ -120,7 +120,7 @@ module.exports = {
     hotOnly: true,
     proxy: {
       "/v1": {
-        target: "http://192.168.37.233:8088",
+        target: "http://192.168.37.25:8088",
         changeOrigin: true,
         pathRewrite: {
           "^/v1": "/v1" //这里理解成用‘/v1’代替target里面的地址，后面组件中我们掉接口时直接用v1代替 比如我要调用'http://40.00.100.100:3002/v1/add'，直接写‘/v1/user/add’即可

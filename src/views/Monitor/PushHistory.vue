@@ -37,9 +37,9 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button type="text" @click="onEdit(scope.row)">点击打开 Dialog</el-button>
+              <!-- <el-button type="text" @click="onEdit(scope.row)">点击打开 Dialog</el-button> -->
               <el-button type="primary" @click="onEdit(scope.row)" icon="el-icon-edit" size="small">修改</el-button>
-              <el-button type="primary" @click="onDel(scope.row)" icon="el-icon-delete" size="small">删除</el-button>
+              <el-button type="primary" @click="onDelete(scope.row)" icon="el-icon-delete" size="small">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -62,7 +62,6 @@
         </el-dialog>
       </div>
     </el-card>
-
   </div>
 </template>
 
@@ -117,7 +116,7 @@ export default {
       this.row = row;
       console.log(row);
     },
-    onDel(row) {
+    onDelete(row) {
       console.log(row);
     },
     search(pushType) {

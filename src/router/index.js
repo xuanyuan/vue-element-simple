@@ -63,4 +63,7 @@ const RouteList = [
 
 ]
 
-export default new Router({routes: RouteList})
+export default new Router({
+  mode: 'history',
+  routes: RouteList
+})
