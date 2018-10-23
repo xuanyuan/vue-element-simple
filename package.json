@@ -1,7 +1,7 @@
 {
-  "name": "gas-alarm-front",
+  "name": "miaodongshequ-front",
   "version": "1.0.0",
-  "description": "",
+  "description": "https://segmentfault.com/a/1190000012789253#articleHeader0",
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline",
@@ -9,7 +9,7 @@
     "fix": "./node_modules/eslint/bin/eslint.js ./src/* --fix"
   },
   "keywords": [],
-  "author": "",
+  "author": "z_dianjun@163.com",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
@@ -56,5 +56,13 @@
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuanyuan/miaodongshequ-front.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xuanyuan/miaodongshequ-front/issues"
+  },
+  "homepage": "https://github.com/xuanyuan/miaodongshequ-front#readme"
 }
